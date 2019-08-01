@@ -21,15 +21,22 @@ class Main {
     System.out.println(word);
 
     StringBuffer s = new StringBuffer(""); 
+
     for (int i = 0; i < word.length(); i++) {
       s.append("*"); 
     }  
     System.out.println(s);
+
+
+  for (int i = 0; i < s.length(); i++) {
+
+    if (s.indexOf("*") != -1) {
+  
     System.out.println("Guess a letter!");
     
     String user_guess = in.nextLine(); 
 
-    System.out.println(user_guess);
+    // System.out.println(user_guess);
     
     int num = word.indexOf(user_guess);
 
@@ -39,7 +46,8 @@ class Main {
     
     System.out.println(s);
 
-
+    } 
+  }
     //StringBuffer replace(int startIndex, int endIndex, String str)
 
 /**
