@@ -14,7 +14,7 @@ class Main {
   public static void main(String[] args) {
 
     Scanner in = new Scanner(System.in);
-    String [] words = {"knife", "spork", "fiesta"}; 
+    String [] words = {"mime", "cuddly", "spork" , "library" , "park" , "bagel"}; 
     int rand_word = (int)(Math.random()*2); 
     
     String word = words[rand_word];  
@@ -27,8 +27,8 @@ class Main {
     }  
     System.out.println(s);
 
-
-  for (int i = 0; i < s.length(); i++) {
+  int lives = 5;
+  while (lives > 0) {
 
     if (s.indexOf("*") != -1) {
   
@@ -38,16 +38,52 @@ class Main {
 
     // System.out.println(user_guess);
     
-    int num = word.indexOf(user_guess);
+    /**
+    word: mime
+    if user guesses m 
+    arrayList: [0, 2]
+    word: spork
+    guesses s
+    arrayList: [0]
 
-    if (num > -1) {
-      s.replace(num, num+1, user_guess); 
+    empty ArrayList --> guess is wrong
+
+    **/
+
+    ArrayList <Integer> indices = new ArrayList<Integer>(); 
+
+    int index = word.indexOf(user_guess);
+    while (index >= 0) {
+      indices.add(index); 
+      index = word.indexOf(user_guess, index + 1);
+    }
+    //mime, user guesses m
+    //indices = [0, 2]
+    //s.get()
+    if (indices.isEmpty()){
+      System.out.println("Incorrect guess");
+      lives -= 1; 
+      System.out.println("You have " + lives + " remaining lives."); 
+      if (lives == 0) {
+        System.out.println("Game over!");
+        System.out.println("The word was " + word + "!");
+      }
+    }
+    else {
+      for (int i = 0; i < indices.size(); i++) {
+        s.replace(indices.get(i), indices.get(i) + 1, user_guess); 
+      }
     }
     
     System.out.println(s);
 
-    } 
-  }
+    } // end of the if loop
+    else {
+      System.out.println("You won!!!");
+      lives = 0;
+    }
+    
+ }
     //StringBuffer replace(int startIndex, int endIndex, String str)
 
 /**
